@@ -1,0 +1,19 @@
+<!--Ying created 01/31/2020-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Ride Sharing</title>{% endblock %}
+</head>
+<body>
+    <div>
+        <h1>Ride Sharing Web</h1>
+        <h2>Register</h2>
+        <p>Welcome to Ride Sharing, a website developed by <em>Ying Xu</em>!</p>
+        <form action="{% url 'user_register' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="button">Register</button>
+        </form>
+    </div>
+</body>
+</html>

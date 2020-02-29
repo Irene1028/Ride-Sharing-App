@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+{% block title %} | Access Denied{% endblock %}
+
+{% block content %}
+<h1>Access Denied</h1>
+<span>We're sorry, but you are not authorized perform this query (Error: 403)</span>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock content %}

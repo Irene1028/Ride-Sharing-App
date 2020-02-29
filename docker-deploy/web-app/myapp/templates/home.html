@@ -1,0 +1,26 @@
+<!--Ying created 01/31/2020-->
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Ride Sharing Web</h1>
+  <p>Hi {{ my_name }}, Welcome to Ride Sharing, a website developed by <em>Ying Xu</em>!</p>
+  <h2>Dynamic content</h2>
+      <li><strong>My Name: </strong>{{ my_name }}</li>
+      <li><strong>My Car: </strong>{{ my_car }}</li>
+      <li><strong>My Sharings: </strong>{{ num_sharer }}</li>
+      <li><strong>My Rides: </strong>{{ num_orders }}</li>
+      <li><strong>I Served: </strong>{{ num_driver }}</li>
+
+  <p>You have the following options:</p>
+  <ul>
+      <button><a href="{% url 'request_ride' %}">Request a Ride</a></button>
+      <button><a href="{% url 'sharer_search_ride' %}">Share a Ride</a></button>
+      <button><a href="{% url 'driver_search_ride' %}">Serve a Ride</a></button>
+
+<!--      <form action="{% url 'driver_search_ride' %}", >-->
+<!--          {% csrf_token %}-->
+<!--          <button type="submit">Serve a Ride</button>-->
+<!--      </form>-->
+  </ul>
+{% endblock %}

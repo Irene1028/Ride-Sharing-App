@@ -1,0 +1,15 @@
+<!--Ying created 02/04/2020-->
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Ride Sharing Web</h1>
+
+  <p>You cancelled the ride successfully!</p>
+  <ul>
+      <button><a href="{% url 'request_ride' %}">Request A New Ride</a></button>
+      <button><a href="{% url 'sharer_search_ride' %}">Share A New Ride</a></button>
+      <button><a href="{% url 'driver_search_ride' %}">Serve a Ride</a></button>
+      <button><a href="{% url 'my_user_request' %}">Back to Ride List</a></button>
+  </ul>
+{% endblock %}

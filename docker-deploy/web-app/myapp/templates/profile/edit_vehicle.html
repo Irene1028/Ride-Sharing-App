@@ -1,0 +1,13 @@
+<!--Ying created 02/02/2020-->
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Ride Sharing Web</h1>
+    <p>Welcome to Ride Sharing, a website developed by <em>Ying Xu</em>!</p>
+    <form action="{% url 'edit_vehicle' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="button">OK!</button>
+    </form>
+{% endblock %}

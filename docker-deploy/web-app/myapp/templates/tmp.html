@@ -1,0 +1,25 @@
+<table>
+                <p><label for="dst_addr">Destination</label>
+                    <input style="width: 40%" id="dst_addr" name="dst_addr" value="{{ ride.dst_addr }}" required></p >
+
+                <p><label for="arrive_time">Arrival Time</label>
+                    <input style="width: 40%" id="arrive_time" name="arrive_time" value="{{ ride.arrive_time }}" required></p >
+
+                <p><label for="owner_passengers">Own Passenger Number</label>
+                    <input style="width: 40%" id="owner_passengers" name="owner_passengers" value="{{ ride.owner_passengers }}" required></p >
+
+                <p><label for="special_request">Special Requests</label>
+                    <input style="width: 40%" id="special_request" name="special_request" value="{{ ride.special_request }}"></p >
+
+                 <p><label for="v_type">Preferred Vehicle Type</label>
+                    <input style="width: 40%" id="v_type" name="v_type" value="{{ ride.v_type }}" required></p >
+
+
+                <p><strong>Willing to share?</strong></p>
+                    <input type="radio" name="is_shared" value="yes">Yes<br/>
+                    <input type="radio" name="is_shared" value="no">No
+                </input>
+
+            </table>
+            <a class="btn btn-info" href="" >Back to order list</a >
+<!--            <input class="btn btn-primary" type="submit" value="Update" style="width: 150px; margin-left: 100px"/>-->

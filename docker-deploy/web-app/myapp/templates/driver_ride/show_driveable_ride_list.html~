@@ -1,0 +1,63 @@
+<!--Ying created 02/02/2020-->
+
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>All Available Rides For Sharing!</h1>
+    <p>Welcome to Ride Sharing!</p>
+    {% if ride_list %}
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Arrival Time</th>
+                    <th scope="col">Owner</th>
+                    <th scope="col">Owner Passengers</th>
+                    <th scope="col">Sharer Passengers</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Driver</th>
+                    <th scope="col">Plate Num</th>
+                    <th scope="col">Operations</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for ride in ride_list %}
+                <tr>
+                    <td>{{ ride.dst_addr }}</td>
+                    <td>{{ ride.arrive_time }}</td>
+                    <td><span>{{ ride.owner.first_name }}</span></td>
+                    <td ><span>{{ ride.owner_passengers }}</span></td>
+                    <td ><span>{{ ride.sharer_passengers }}</span></td>
+                    <td><span>{{ ride.status }}</span></td>
+                    <td><span>
+                        {% if ride.driver %}
+                            {{ ride.driver.first_name }}
+                        {% else %}
+                            TBDDDD
+                        {% endif %}
+                        </span>
+                    </td>
+                    <td><span>
+                        {% if ride.plate_number %}
+                            {{ ride.plate_number }}
+                        {% else %}
+                            TBD
+                        {% endif %}
+                        </span>
+                    </td>
+                    <td>
+                        <button><span>
+                            <a href="{% url 'join_and_show_the_ride' ride.pk share_passengers %}">Join</a>
+                        </span></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Sorry! We could not find any matching rides.</p>
+    {% endif %}
+
+{% endblock %}

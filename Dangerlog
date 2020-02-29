@@ -1,0 +1,13 @@
+Assumptions:
+
+1. We are assuming that there is only one sharer per ride that is using the application. This means that only one Sharer party can be on a single ride (as opposed to multiple sharer parties, each with their own number of occupants).
+2. User iteraction with any single entry/ride will be low enough that we do not need to worry about race conditions.
+3. The TA/Tester/User isn't going to actively exploit our system to try and break it (SQL inject, invalid characters, etc.).
+
+Danger Log:
+
+1. We are not explicitly handling concurrency. This means that if two users modify the database at the same time (say both join the same ride as sharer) it may cause a race condition. We do handle stale pages (e.g. prevent sharer from getting on a ride that has changed from 'Open' to 'Confirmed' in the mean time) but users can race on the conditions that we are using to prevent these. While it is unlikely that this will happen due to the nature of the app (likely only a handful of users will ever interact with a single ride, and chances are they won't at the same millisecond), it is still possible.
+
+2. Many of our edit/delete links do not actually confirm the user's authentication, which means other (logged in) users could edit/delete rides they are not involved in. This exploit is only possible if the user has the UUID for the ride they wish to edit, in which case they can directly request the URL for the edit/delete. This could be avoided by confirming the user is the same as the expected one for the query (e.g. current user is same as owner of ride for owner edit).
+
+3. We perform no escaping in our forms, which leaves us open to SQL injection attacks. As a possible side issue, there have been cases of certain character sets causing security flaws (https://medium.com/@chetan_conikee/case-study-exploiting-a-business-logic-flaw-with-githubs-forgot-password-workflow-discovered-d4d36ee3dd16) which we are assuming Django's auth backend does not encounter.

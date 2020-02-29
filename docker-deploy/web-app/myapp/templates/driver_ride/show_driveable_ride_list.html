@@ -1,0 +1,43 @@
+<!--Ying created 02/02/2020-->
+
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>All Available Rides For Driving!</h1>
+    <p>Welcome to Ride Sharing!</p>
+    {% if ride_list %}
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Arrival Time</th>
+                    <th scope="col">Owner</th>
+                    <th scope="col">Total Passengers</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Operations</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for ride in ride_list %}
+                <tr>
+                    <td>{{ ride.dst_addr }}</td>
+                    <td>{{ ride.arrive_time }}</td>
+                    <td><span>{{ ride.owner.first_name }}</span></td>
+                    <td ><span>{{ ride.total_pass }}</span></td>
+                    <td><span>{{ ride.status }}</span></td>
+                    <td>
+                        <button><span>
+                            <a href="{% url 'driver_join_and_show_the_ride' ride.pk %}">Join</a>
+                        </span></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Sorry! We could not find any matching rides.</p>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,48 @@
+Using AUTH
+https://wsvincent.com/django-user-authentication-tutorial-login-and-logout/
+
+Using AUTH as user key --> change "user" to "userProfile"
+https://stackoverflow.com/questions/19433630/how-to-use-user-as-foreign-key-in-django-1-5
+One-to-one
+https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
+
+
+Trigger on state change?
+https://stackoverflow.com/questions/25732803/need-to-wait-on-specific-column-state-change-in-sql
+
+Generate unique RID
+https://stackoverflow.com/questions/16925129/generate-unique-id-in-django-from-a-model-field
+
+SQL lookup/displaying SQL?
+https://docs.djangoproject.com/en/3.0/topics/db/sql/
+https://stackoverflow.com/questions/40606228/python-django-custom-query-result-in-html
+
+Maybe use RID so website/type/RID? (website/owner/RID, website/driver/RID, website/share/RID)
+
+Need to have SEPARATE pNum for owner's group and total owner+share
+
+website/login
+website/register
+website/main_page --> website/type
+
+website/owner/new_request - generate ride request
+website/owner/RID - loading page until trigger from open --> confirm, display driver w/ RID info when confirm
+website/owner/RID/edit - show new_request with filled info for RID --> allow edit and cancel or fail if status =/= open, RID maintained since not confirmed yet (must lock if status =/= open)
+
+website/vehicle - allow name change, PW change, vehicle registry
+website/driver - check if vehicle exists
+website/driver/register - subpage to register if vehicle DNE
+website/driver/search - search with vehicle info for valid owners
+website/driver/RID - when select from search get RID + info from owner, complete button, set ALL RID to confirm, can move back to register --> drop/edit driver row
+
+website/share/new_request - generate share request
+website/share/search - search with share info for valid owners
+website/share/RID - when select from search get RID + info from owner, add to pNum for owner, sync status to owner's status (show same page)
+website/share/RID/edit - new_request with filled info for RID --> must drop RID and search again
+
+
+Might want to add separate history table --> ensure vehicle info manitained if driver changes
+FK username | RID | type (driver/owner/share) | plate | vehicle type | SVI | pNum (actual number) | address | time confirm | time complete
+
+Forms
+https://docs.djangoproject.com/en/3.0/topics/forms/

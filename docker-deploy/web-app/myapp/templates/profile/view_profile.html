@@ -1,0 +1,33 @@
+<!--Ying created 01/31/2020-->
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Ride Sharing Web</h1>
+  <p>Hi {{ first_name }}, Welcome to Ride Sharing, a website developed by <em>Ying Xu</em>!</p>
+  <h2>My Information</h2>
+      <li><strong>Username: </strong>{{ username }}</li>
+      <li><strong>My Email: </strong>{{ email }}</li>
+      <li><strong>First Name: </strong>{{ first_name }}</li>
+      <li><strong>Last Name: </strong>{{ last_name }}</li>
+      <li><strong>I'm Driver: </strong>{{ is_driver }}</li>
+  <p>You have the following options:</p>
+  <ul>
+      <button><a href="{% url 'edit_profile' %}">Edit My Profile</a></button>
+      <button><a href="{% url 'change_password' %}">Change My Password</a></button>
+      {% if is_driver == False %}
+      <button><a href="{% url 'driver_register' %}">Register As Driver</a></button>
+      {% endif %}
+  </ul>
+{% if is_driver == True %}
+  <h2>Vehicle Information</h2>
+      <li><strong>plate number: </strong>{{ my_car.plate_number }}</li>
+      <li><strong>license number: </strong>{{ my_car.license_num }}</li>
+      <li><strong>vehicle type: </strong>{{ my_car.v_type }}</li>
+      <li><strong>number of passengers: </strong>{{ my_car.num_of_passengers }}</li>
+      <li><strong>special info: </strong>{{ my_car.special_info }}</li>
+  <p>You have the following options:</p>
+  <ul>
+      <button><a href="{% url 'edit_vehicle' %}">Edit My Vehicle</a></button>
+  </ul>
+{% endif %}
+{% endblock %}

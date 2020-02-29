@@ -1,0 +1,12 @@
+<!--Ying created 02/02/2020-->
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Request A Ride!</h1>
+    <p>Welcome to Ride Sharing!</p>
+    <form action="{% url 'request_ride' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="button">Request</button>
+    </form>
+{% endblock %}

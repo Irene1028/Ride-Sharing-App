@@ -1,0 +1,127 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div style="margin-top: 50px; margin-left: 50px;">
+        <h3>Your Ride Details</h3>
+
+        <div style="margin-top: 15px">
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 200px; "><strong>Destination</strong></span>
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 400px">{{ ride.dst_addr }}</span>
+        </div>
+
+        <div>
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 200px"><strong>Arrival Time</strong></span>
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 400px">
+                {{ ride.arrive_time | date:"Y-m-d H:i" }}
+            </span>
+        </div>
+
+        <div>
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 200px"><strong>Status</strong></span>
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 400px">{{ ride.status }}</span>
+        </div>
+
+        <div>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 200px"><strong>Owner</strong></span>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 400px">{{ ride.owner.first_name }}</span>
+        </div>
+
+        <div>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 200px"><strong>Owner Passengers</strong></span>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 400px">{{ ride.owner_passengers }}</span>
+        </div>
+
+        <div>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 200px"><strong>Vehicle Type</strong></span>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 400px">{{ ride.v_type }}</span>
+        </div>
+
+        <div>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 200px">
+                <strong>Owner Special Info</strong>
+            </span>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 400px">
+                {% if ride.special_request %}
+                    {{ ride.special_request }}
+                {% else %}
+                    No special request
+                {% endif %}
+            </span>
+        </div>
+
+        <div>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 200px"><strong>Share?</strong></span>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 400px">
+                {% if ride.sharable %}
+                    Yes
+                {% else %}
+                    No
+                {% endif %}
+            </span>
+        </div>
+
+        {% if ride.sharable %}
+        <div>
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 200px">
+                <strong>Sharer</strong>
+            </span>
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 400px">
+                {% if ride.sharer %}
+                    {{ ride.sharer.first_name }}
+                {% else %}
+                    {% if ride.status == 'Open' %}
+                        TBD
+                    {% else %}
+                        None
+                    {% endif %}
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
+
+        {% if ride.sharer %}
+        <div>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 200px">
+                <strong>Sharer Passengers</strong>
+            </span>
+            <span class="alert alert-secondary" role="alert" style="display: inline-block; width: 400px">
+                {{ ride.sharer_passengers }}
+            </span>
+        </div>
+        {% endif %}
+
+
+        <div>
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 200px">
+                <strong>Driver</strong>
+            </span>
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 400px">
+                {% if ride.driver %}
+                    {{ ride.driver.first_name }}
+                {% else %}
+                    TBD
+                {% endif %}
+                </span>
+        </div>
+
+        {% if ride.driver %}
+            <div>
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 200px">
+                <strong>Plate Number</strong>
+            </span>
+            <span class="alert alert-primary" role="alert" style="display: inline-block; width: 400px">
+                {{ ride.plate_number }}
+            </span>
+            </div>
+        {% endif %}
+
+        <div>
+            {% if ride.status == 'Open' %}
+                <button><a href="{% url 'own_ride_edit' ride.pk %}">Edit the Ride</a></button>
+                <button><a href="{% url 'cancel_ride' ride.pk %}">Cancel the Ride</a></button>
+            {% endif %}
+            <button><a href="{% url 'my_user_request' %}">Back to Ride List</a></button>
+        </div>
+
+    </div>
+{% endblock %}

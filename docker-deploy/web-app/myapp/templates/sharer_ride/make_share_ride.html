@@ -1,0 +1,16 @@
+<!--Ying created 02/02/2020-->
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Share A Ride!</h1>
+    <p>Welcome to Ride Sharing!</p>
+    {% if is_valid == False %}
+    <li>* Your time is invalid! Please re-check your arrival window.</li>
+    {% endif %}
+    <form action="{% url 'show_share_search_result' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="button">Search Available Ride</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,4 @@
+Django>3.0
+psycopg2
+postgres
+django-tempus-dominus==5.1.2.13

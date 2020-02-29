@@ -1,0 +1,137 @@
+<!--Ying created 02/02/2020-->
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>My Ride Sharing Orders!</h1>
+    <p>Welcome to Ride Sharing!</p>
+    <h2>Rides I Started</h2>
+    {% if ride_lists.own_list %}
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Arrival Time</th>
+                    <th scope="col">Total Passengers</th>
+                    <th scope="col">Shared?</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Operations</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for ride in ride_lists.own_list %}
+                <tr>
+                    <td><a href="{% url 'ride_detail_view' ride.pk %}">{{ ride.dst_addr }}</a ></td>
+                    <td>{{ ride.arrive_time }}</td>
+                    <td ><span>{{ ride.owner_passengers|add:ride.sharer_passengers }}</span></td>
+                    <td><span>
+                        {% if ride.sharable %}
+                            Yes
+                        {% else %}
+                            No
+                        {% endif %}
+                    </span>
+                    </td>
+                    <td><h5><span>{{ ride.status }}</span></h5></td>
+                    <td>{% if ride.status == "Open" %}
+                        <button><span><a href="{% url 'own_ride_edit' ride.pk %}" >Edit</a ></span></button>
+                        <button><span><a href="{% url 'cancel_ride' ride.pk %}">Cancel</a ></span></button>
+                        {% else %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You did not own any ride.</p >
+    {% endif %}
+
+    <h2>Rides I Shared</h2>
+    {% if ride_lists.share_list %}
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Arrival Time</th>
+                    <th scope="col">Total Passengers</th>
+                    <th scope="col">Shared?</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Operations</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for ride in ride_lists.share_list %}
+                <tr>
+                    <td><a href="{% url 'sharer_ride_detail_view' ride.pk %}">{{ ride.dst_addr }}</a ></td>
+                    <td>{{ ride.arrive_time }}</td>
+                    <td ><span>{{ ride.owner_passengers|add:ride.sharer_passengers }}</span></td>
+                    <td><span>
+                        {% if ride.sharable %}
+                            Yes
+                        {% else %}
+                            No
+                        {% endif %}
+                    </span>
+                    </td>
+                    <td><h5><span>{{ ride.status }}</span></h5></td>
+                    <td>{% if ride.status == "Open" %}
+                        <button><span><a href="{% url 'sharer_ride_edit' ride.pk %}" >Edit</a ></span></button>
+                        <button><span><a href="{% url 'sharer_ride_cancel' ride.pk %}">Cancel</a ></span></button>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You did not share any ride.</p >
+    {% endif %}
+
+    <h2>Rides I Served</h2>
+    {% if ride_lists.driver_list %}
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Arrival Time</th>
+                    <th scope="col">Total Passengers</th>
+                    <th scope="col">Shared?</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Operations</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for ride in ride_lists.driver_list %}
+                <tr>
+                    <td><a href="{% url 'driver_ride_detail_view' ride.pk %}">{{ ride.dst_addr }}</a ></td>
+                    <td>{{ ride.arrive_time }}</td>
+                    <td ><span>{{ ride.owner_passengers|add:ride.sharer_passengers }}</span></td>
+                    <td>
+                        <span>
+                        {% if ride.sharable %}
+                            Yes
+                        {% else %}
+                            No
+                        {% endif %}
+                        </span>
+                    </td>
+                    <td><h5><span>{{ ride.status }}</span></h5></td>
+                    <td>
+                        {% if ride.status == "Confirmed" %}
+                        <button><span><a href="{% url 'complete_ride' ride.pk %}" >Complete</a></span></button>
+<!--                        <button><span><a href="">Cancel</a></span></button>-->
+                        {% else %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You did not serve any ride.</p >
+    {% endif %}
+{% endblock %}

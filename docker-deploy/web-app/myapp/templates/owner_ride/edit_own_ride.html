@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div style="margin-top: 50px; margin-left: 50px">
+    <h1>Update My Own Rides</h1>
+    <h3>Ride to: {{ride.dst_addr}}</h3>
+
+        <form action="{% url 'own_ride_edit' ride.pk %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="button">Edit</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Ride Sharing</title>{% endblock %}
+</head>
+<body>
+
+    <h1>Ride Sharing Web</h1>
+    <h2>Login</h2>
+    <p>Welcome to Ride Sharing, a website developed by <em>Ying Xu</em>!</p>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <p>Don't have an account? Create <a href="{% url 'user_register' %}">here</a></p>
+<!--        <p>Forgot passward? Reset <a href="{% url 'reset_password' %}">here</a></p>-->
+        <button type="submit" class="button">Login</button>
+    </form>
+
+</body>
+</html>
